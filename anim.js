@@ -9,27 +9,59 @@ if (audio && lyrics) {
   // Letras del mensaje y su tiempo de aparición
   var messageData = [
     {
-      text: "A veces, la vida nos lleva por caminos distintos, pero hay algo que quiero que nunca olvides: siempre estaré aquí para ti",
-      time: 10,
+      text: "Cuando llega las 12",
+      time: 17,
     },
     {
-      text: "No importa cuánto tiempo pase ni qué tan lejos estemos, en los momentos difíciles es cuando más puedes contar conmigo",
+      text: "Y se apague la luz",
       time: 20,
     },
-    {
-      text: "Hoy, en este 14 de febrero, te dedico estas flores y esta canción, la misma que una vez compartimos, porque hay sentimientos que el tiempo no borra",
-      time: 35,
+    {  
+      text: "Cuando venga un recuerdo a mi mente quiero que seas tu",
+      time: 24,
     },
     {
-      text: "Aunque la distancia nos ponga a prueba y el destino nos haga tomar rumbos diferentes, mi presencia sigue intacta",
-      time: 50,
+      text: "Quiero verme en tu mirada y cantarte a viva voz",
+      time: 31,
+    },
+    {
+      text: "El cumpleaños mas hermoso que existio",
+      time: 37,
+    },
+    {
+      text: "Un año mas de vida",
+      time: 44,
+    },
+    {
+      text: "Que te regala Dios",
+      time: 47,
+    },
+    {
+      text: "Que toda tu familia se pueda reunir hoy",
+      time: 51,
+    },
+    {
+      text: "Un año mas de vida",
+      time: 57,
+    },
+    {
+      text: "Para vivir mejor",
+      time: 60,
+    },
+    {
+      text: "Porque el mejor regalo es ver la luz de sol",
+      time: 63,
+    },
+    {
+      text: ".............................................",
+      time: 69,
     },
   ];
 
   function updateMessage() {
     let time = Math.floor(audio.currentTime);
     let nextMessageIndex = messageData.findIndex(
-      (line) => time >= line.time && time < line.time + 8
+      (line) => time >= line.time && time < line.time + 2
     );
 
     if (nextMessageIndex !== -1 && nextMessageIndex !== currentMessageIndex) {

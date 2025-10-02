@@ -8,35 +8,129 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" href="img/flowers.png" type="image/x-icon">
     <title>Flowers</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden; /* para que el confeti no genere scroll */
+        }
+        canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 0; /* el confeti queda detrás */
+        }
+        .greetings, .titulo2, .button {
+            position: relative;
+            z-index: 1; /* asegura que el texto esté encima del confeti */
+        }
+    </style>
 </head>
 
 <body>
+    <!-- Texto animado -->
     <div class="greetings">
         <span>H</span>
-        <span>O</span>
-        <span>L</span>
         <span>A</span>
+        <span>P</span>
+        <span>P</span>
+        <span>Y</span>
+    </div>
+
     <div class="greetings">
-        <span> </span>
+        <span>B</span>
+        <span>I</span>
+        <span>R</span>
+        <span>T</span>
+        <span>H</span>
+        <span>D</span>
+        <span>A</span>
+        <span>Y</span>
+    </div>
+
+    <div class="greetings">
         <span>C</span>
         <span>A</span>
         <span>R</span>
         <span>O</span>
         <span>L</span>
     </div>
-    <div class="description">
-        <span>ESTE DETALLE ES PARA TI :)</span>
+
+    <!-- Frase -->
+    <h1 class="titulo2">
+        ¡Que este día esté lleno de sonrisas, abrazos y momentos inolvidables! 💖✨
+    </h1>
+
+    <!-- Botón -->
+    <div class="button">
+        <button class="botones">
+            <a href="flower.html" style="color: #169dd3;">CLICK AQUÍ</a>
+        </button>
     </div>
-    </div>
-</div>
-<h1 class="titulo">Eres como una flor en primavera: llenas mi vida de color, alegría y esperanza.</span>
-</div>
-<div class="button">
-    <button class="botones">
-        <a href="flower.html" style="color: #ffffff;">CLICK AQUÍ</a>
-    </button>
-</div>
+
+    <!-- Canvas para confeti -->
+    <canvas id="confetti"></canvas>
+
+    <!-- Script confeti -->
+    <script>
+        const canvas = document.getElementById("confetti");
+        const ctx = canvas.getContext("2d");
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const confettiPieces = [];
+
+        function random(min, max) {
+            return Math.random() * (max - min) + min;
+        }
+
+        class Confetti {
+            constructor() {
+                this.x = random(0, canvas.width);
+                this.y = random(-20, canvas.height / 2);
+                this.size = random(5, 10);
+                this.color = `hsl(${random(0, 360)}, 100%, 50%)`;
+                this.speedY = random(2, 5);
+                this.speedX = random(-2, 2);
+            }
+            update() {
+                this.y += this.speedY;
+                this.x += this.speedX;
+                if (this.y > canvas.height) {
+                    this.y = -10;
+                    this.x = random(0, canvas.width);
+                }
+            }
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.fillRect(this.x, this.y, this.size, this.size);
+            }
+        }
+
+        function initConfetti() {
+            for (let i = 0; i < 150; i++) {
+                confettiPieces.push(new Confetti());
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            confettiPieces.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animate);
+        }
+
+        initConfetti();
+        animate();
+
+        // Ajustar cuando cambie el tamaño de la pantalla
+        window.addEventListener("resize", () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    </script>
 </body>
 
 </html>
-
